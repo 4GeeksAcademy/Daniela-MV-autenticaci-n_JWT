@@ -51,13 +51,13 @@ def singup():
 @api.route("/login", methods=["POST"])
 def login():
 
-    data=request.get_json()
-    user=User.query.filter_by(email=data["email"].lower()).firts()
-    if not user or not check_password_hash (user.password,data["password"]):
-       return jsonify({"msg": "invalid email or password"}), 401 
-
+    data = request.get_json()
+    user = User.query.filter_by(email=data["email"].lower()).first()
+    if not user or not check_password_hash(user.password, data["password"]):
+        return jsonify({"msg": "invalid email or password"}), 401
 
     access_token = create_access_token(identity=user.id)
     return jsonify({
-        "token":access_token,
-        "msg":"logged in successfully"}),200
+        "token": access_token,
+        "msg": "logged in successfully",
+        "user": user.serialize()}), 200
