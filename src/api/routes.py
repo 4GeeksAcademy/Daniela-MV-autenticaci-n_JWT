@@ -9,7 +9,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 
-
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
@@ -29,14 +28,14 @@ def handle_hello():
 @api.route("/singup", methods=["POST"])
 def singup():
 
-    data= request.get_jason()
+    data = request.get_json()
 
-    hashed_password=generate_password_hash(data["password"])
+    hashed_password = generate_password_hash(data["password"])
 
-    new_user=User(
+    new_user = User(
         email=data["email"].lower(),
         username=data["username"].lower(),
-        email=hashed_password,
+        password=hashed_password,
         is_active=True,
     )
 
@@ -49,13 +48,16 @@ def singup():
         return jsonify({"msg": f"Error creating user {str(e)}"}), 500
 
 
- 
 @api.route("/login", methods=["POST"])
 def login():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if username != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
 
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token)
+    data=request.get_json()
+    user=User.query.filter_by(email=data["email"].lower()).firts()
+    if not user or not check_password_hash (user.password,data["password"]):
+       return jsonify({"msg": "invalid email or password"}), 401 
+
+
+    access_token = create_access_token(identity=user.id)
+    return jsonify({
+        "token":access_token,
+        "msg":"logged in successfully"}),200
