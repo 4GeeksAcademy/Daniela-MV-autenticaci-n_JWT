@@ -63,7 +63,7 @@ def login():
         "user": user.serialize()}), 200
 
 
-@app.route("/protected", methods=["GET"])
+@api.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
     # Access the identity of the current user with get_jwt_identity
