@@ -56,8 +56,16 @@ def login():
     if not user or not check_password_hash(user.password, data["password"]):
         return jsonify({"msg": "invalid email or password"}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify({
         "token": access_token,
         "msg": "logged in successfully",
         "user": user.serialize()}), 200
+
+
+@app.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
