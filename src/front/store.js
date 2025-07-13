@@ -35,6 +35,17 @@ export default function storeReducer(store, action = {}) {
         isAuthenticated:true
        }
 
+       case 'logout':
+      localStorage.removeItem("token")
+      localStorage.removeItem("user")
+
+       return {
+        ...store,
+        token: null,
+        user: null,
+        isAuthenticated:false 
+       }
+
     
     default:
       throw Error('Unknown action.');

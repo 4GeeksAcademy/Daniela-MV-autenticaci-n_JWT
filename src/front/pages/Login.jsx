@@ -42,16 +42,17 @@ export const Login = () => {
             console.error("Error de login", error)
             alert("Login error")
         }
+    }
 
-        return (
+    return (
 
-            <div className="container d-flex justify-content-center align-items-center mt-5">
-                <div className="col-lg-8 text-light p-5 rounded-4 shadow-lg" style={{ backgroundColor: ' #FFA500' }}>
+        <div className="container d-flex justify-content-center align-items-center mt-5">
+            <div className="col-lg-8 text-light p-5 rounded-4 shadow-lg" style={{ backgroundColor: ' #FFA500' }}>
 
-                    <h2 className="text-center text-dark fw-bold mb-4 border-bottom border-primary pb-2">Login</h2>
+                <h2 className="text-center text-dark fw-bold mb-4 border-bottom border-primary pb-2">Login</h2>
 
-                    <form className="row g-6" onSubmit={handleSubmit}>
-                        {/* <div className="col-md-6">
+                <form className="row g-6" onSubmit={handleSubmit}>
+                    {/* <div className="col-md-6">
                         <label htmlFor="inputFullName" className="form-label text-dark fw-bold ">Full Name</label>
                         <input type="text" className="form-control shadow-sm" id="inputFullName" name="fullName"
                         value={form.fullName} 
@@ -65,32 +66,32 @@ export const Login = () => {
                         // onChange={handleChange} 
                         />
                     </div> */}
-                        <div className="col-md-6">
-                            <label htmlFor="inputEmail" className="form-label text-dark fw-bold ">Email</label>
-                            <input type="text" className="form-control shadow-sm" id="inputEmail" name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
+                    <div className="col-md-6">
+                        <label htmlFor="inputEmail" className="form-label text-dark fw-bold ">Email</label>
+                        <input type="text" className="form-control shadow-sm" id="inputEmail" name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
 
-                        <div className="col-md-6">
-                            <label htmlFor="inputPassword" className="form-label text-dark fw-bold ">Password</label>
-                            <input type="text" className="form-control shadow-sm" id="inputPassword" name="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-12 text-center mt-4">
-                            <button
-                                type="submit"
-                                className="btn btn-danger btn-lg fw-bold px-5 py-2"
-                            >
-                                Login
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="col-md-6">
+                        <label htmlFor="inputPassword" className="form-label text-dark fw-bold ">Password</label>
+                        <input type="password" className="form-control shadow-sm" id="inputPassword" name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-12 text-center mt-4">
+                        <button
+                            type="submit"
+                            className="btn btn-danger btn-lg fw-bold px-5 py-2"
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
